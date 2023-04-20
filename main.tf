@@ -14,7 +14,7 @@ resource "aws_lambda_function" "lambda_function" {
   filename      = "API.zip"
   source_code_hash = data.archive_file.python_lambda_package.output_base64sha256
   role          = data.aws_iam_role.lambda.arn
-  runtime       = "Python3.9"
+  runtime       = "python3.9"
   handler       = "lambda_function.lambda_handler"
   timeout       = 10
 }
