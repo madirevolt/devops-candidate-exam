@@ -28,7 +28,9 @@ pipeline{
         stage("Invoke Lambda"){
             steps{
                 echo "Invoking your AWS Lambda"
-                sh 'aws lambda invoke --function-name "DevOps-Candidate-Lambda" --region "ap-south-1" --log-type Tail output.txt'
+                def logResult = sh(script: "aws lambda invoke --function-name \"DevOps-Candidate-Lambda\" --region \"ap-south-1\" --log-type Tail output.txt", returnStdout: true).trim()
+                def encodedLogResult = sh(script: "echo ${logResult} | jq -r '.LogResult' | base64 --decode", returnStdout: true).trim()
+                echo "Encoded Log Result: ${encodedLogResult}"
             }
         }
     }
