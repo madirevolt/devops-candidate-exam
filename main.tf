@@ -1,6 +1,6 @@
 resource "aws_subnet" "SubnetDevops" {
   vpc_id     = data.aws_vpc.vpc.id
-  cidr_block = "10.0.4.0/24"
+  cidr_block = "10.0.40.0/24"
 }
 
 data "archive_file" "python_lambda_package" {  

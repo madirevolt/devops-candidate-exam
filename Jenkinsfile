@@ -1,6 +1,12 @@
 pipeline{
     agent any
     stages{
+        stage("TF Destroy"){
+            steps{
+                echo "Executing Terraform Destroy"
+                sh 'terraform destroy --auto-approve'
+            }
+        }
         stage("TF Init"){
             steps{
                 echo "Executing Terraform Init"
