@@ -10,7 +10,7 @@ data "archive_file" "python_lambda_package" {
 }
 
 resource "aws_route_table" "my_route_table" {
-  vpc_id = aws_vpc.my_vpc.id
+  vpc_id = data.aws_vpc.vpc.id
 
   # Add a route to the Internet Gateway (assuming it exists)
 
