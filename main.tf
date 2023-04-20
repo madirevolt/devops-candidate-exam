@@ -9,6 +9,13 @@ data "archive_file" "python_lambda_package" {
   output_path = "API.zip"
 }
 
+resource "aws_route_table" "my_route_table" {
+  vpc_id = aws_vpc.my_vpc.id
+
+  # Add a route to the Internet Gateway (assuming it exists)
+
+}
+
 resource "aws_lambda_function" "lambda_function" {
   function_name = "DevOps-Candidate-Lambda"
   filename      = "API.zip"
