@@ -1,10 +1,6 @@
 resource "aws_subnet" "SubnetDevops" {
   vpc_id     = data.aws_vpc.vpc.id
   cidr_block = "10.0.1.0/24"
-
-  tags = {
-    Name = "Main"
-  }
 }
 
 resource "aws_security_group" "SGDevops" {
@@ -23,6 +19,15 @@ resource "aws_security_group" "SGDevops" {
     to_port = 65535
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_route_table" "my_route_table" {
+  vpc_id = data.aws_vpc.vpc.id
+  # Add a route to the NAT gateway
+  route {
+    cidr_block = "0.0.0.0/0"
+    nat_gateway_id = data.aws_nat_gateway.nat.id
   }
 }
 

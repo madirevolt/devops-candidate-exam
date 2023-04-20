@@ -4,30 +4,31 @@ pipeline{
         stage("TF Init"){
             steps{
                 echo "Executing Terraform Init"
-                terraform init
+                sh 'terraform init'
             }
         }
         stage("TF Validate"){
             steps{
                 echo "Validating Terraform Code"
-                terraform validate
+                sh 'terraform validate'
             }
         }
         stage("TF Plan"){
             steps{
                 echo "Executing Terraform Plan"
-                terraform plan
+                sh 'terraform plan'
             }
         }
         stage("TF Apply"){
             steps{
                 echo "Executing Terraform Apply"
-                terraform apply
+                sh 'terraform apply'
             }
         }
         stage("Invoke Lambda"){
             steps{
                 echo "Invoking your AWS Lambda"
+                sh 'aws lambda invoke --function-name "DevOps-Candidate-Lambda" --region "ap-south-1" output.txt'
             }
         }
     }
